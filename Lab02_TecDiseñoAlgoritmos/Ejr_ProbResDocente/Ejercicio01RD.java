@@ -4,12 +4,12 @@ package Lab02_TecDiseñoAlgoritmos.Ejr_ProbResDocente;
 
 public class Ejercicio01RD {
     
-    public class Recursividad{
-            repetir();
-        }
+    void repetir(){
+        repetir();
+    }
 
     public static void main(String[] args){
-        Recursividad re = new Recursividad();
+        Ejercicio01RD re = new Ejercicio01RD();
         re.repetir();
     }
 
