@@ -28,7 +28,7 @@ public class Ejercicio01PP {
 
     public static void main(String[] args) {
         List<String> lista = new List<>();
-
+        //lista empieza con un nodo de valor "A"
         Node<String> nodo1 = new Node<>("A");
         Node<String> nodo2 = new Node<>("B");
         Node<String> nodo3 = new Node<>("C");

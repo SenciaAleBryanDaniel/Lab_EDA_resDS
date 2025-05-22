@@ -1,5 +1,7 @@
 package Lab03_Poo_herencia_interfaz_genericidad.Ejr_ProbResDocente;
 
+//Clase animal en java
+
 import java.util.ArrayList;
 import java.util.List;
 

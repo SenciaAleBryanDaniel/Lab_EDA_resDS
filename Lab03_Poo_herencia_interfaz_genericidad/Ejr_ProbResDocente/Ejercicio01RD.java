@@ -14,6 +14,7 @@ public class Ejercicio01RD {
 
     System.out.println(alumnos.hashCode());//identificador del hash
     System.out.println(alumnos.isEmpty()); //identifica si la lista esta vacia
+    System.out.println(alumnos.size()); //cantidad de elementos
 
     }
 }
