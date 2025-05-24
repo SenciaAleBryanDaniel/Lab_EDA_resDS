@@ -40,7 +40,6 @@ public class Ejercicio03RD {
         /*List<Animal> mascotas2 = new List<Animal>(); <- Ver error 
         no se puede instanciar debido a q List es una interfaz en java
         */
-        // Agregar elementos y mostrar comportamiento
         mascotas.add(new Animal("Lucas", true));
         mascotas.add(new Animal("Luna", false));
 
