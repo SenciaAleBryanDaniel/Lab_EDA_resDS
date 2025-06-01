@@ -1,0 +1,93 @@
+package Lab04_ListasEnlazadas.Ejr_ProbPropuestos.Ejercicio01PP;
+
+/*Implementar una lista doblemente enlazada que tenga los elementos 
+del 1 al 10, usando la clase nodo en java. */
+
+public class LinkedList<E> {           
+    private static class Node<E> {     
+        E data;
+        Node<E> next, prev;            
+        Node(E d) { data = d; }
+    }
+
+    private Node<E> head, tail;        
+    private int size = 0;
+
+    /* -------- inserción al final -------- */
+    public void addLast(E elem) {
+        Node<E> n = new Node<>(elem);
+        if (head == null) head = tail = n;
+        else { tail.next = n; n.prev = tail; tail = n; }
+        size++;
+    }
+
+    /* -------- inserción al inicio -------- */
+    public void addFirst(E elem) {
+        Node<E> n = new Node<>(elem);
+        if (head == null) head = tail = n;
+        else { n.next = head; head.prev = n; head = n; }
+        size++;
+    }
+
+    /* -------- borrado por dato -------- */
+    public boolean deleteByKey(E key) {
+        for (Node<E> p = head; p != null; p = p.next) {
+            if ( (key == null && p.data == null) || (key != null && key.equals(p.data)) ) {
+                unlink(p);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /* -------- borrado por posición -------- */
+    public E deleteAt(int index) {
+        checkBounds(index);
+        Node<E> p = node(index);
+        E old = p.data;
+        unlink(p);
+        return old;
+    }
+
+    /* -------- getters de uso general -------- */
+    public int size() { return size; }
+
+    public E get(int index) {
+        checkBounds(index);
+        return node(index).data;
+    }
+
+    /* ============ helpers privados ============ */
+    private Node<E> node(int index) {          // acceso O(n)
+        Node<E> p = head;
+        for (int i = 0; i < index; i++) p = p.next;
+        return p;
+    }
+
+    private void unlink(Node<E> p) {
+        Node<E> prev = p.prev, next = p.next;
+        if (prev == null) head = next; else prev.next = next;
+        if (next == null) tail = prev; else next.prev = prev;
+        size--;
+    }
+
+    private void checkBounds(int idx) {
+        if (idx < 0 || idx >= size) throw new IndexOutOfBoundsException(idx);
+    }
+
+    /* -------- recorrido -------- */
+    @Override public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        for (Node<E> p = head; p != null; p = p.next) {
+            sb.append(p.data).append(p.next == null ? "]" : ", ");
+        }
+        return sb.toString();
+    }
+
+    /* -------------- prueba rápida -------------- */
+    public static void main(String[] args) {
+        LinkedList<String> list = new LinkedList<>();
+        for (int i=1;i<=10;i++) list.addFirst(i);
+        list.printForward();
+    }
+}
