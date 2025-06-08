@@ -5,30 +5,28 @@ modificar los métodos vistos en los ejercicios propuestos (insert, printList, d
 size, removeFirst, removelast, addFirst y addLast) y probar una clase Principal con un menú de opciones
 para probar los métodos. */
 
-/* Ejercicio 7 – Lista circular simple con menú de prueba */
+
 import java.util.Scanner;
 
 public class CircularCompLinkedList<E> {
 
-    /* ---------- Nodo ---------- */
     private static class Node<E> {
         E data;
         Node<E> next;
         Node(E d) { data = d; }
     }
 
-    private Node<E> tail;         // tail.next es la cabeza
+    private Node<E> tail;      
     private int size = 0;
 
-    /* ---------- métodos solicitados ---------- */
-    public void insert(E e) { addLast(e); }          // alias
-    public void addLast(E e) {                       // O(1)
+    public void insert(E e) { addLast(e); }       
+    public void addLast(E e) {                       
         Node<E> n = new Node<>(e);
         if (tail == null) { n.next = n; tail = n; }
         else { n.next = tail.next; tail.next = n; tail = n; }
         size++;
     }
-    public void addFirst(E e) {                      // O(1)
+    public void addFirst(E e) {                    
         Node<E> n = new Node<>(e);
         if (tail == null) { n.next = n; tail = n; }
         else { n.next = tail.next; tail.next = n; }
@@ -37,7 +35,7 @@ public class CircularCompLinkedList<E> {
     public void printList() {
         if (tail == null) { System.out.println("Lista: []"); return; }
         System.out.print("Lista: ");
-        Node<E> p = tail.next;           // cabeza lógica
+        Node<E> p = tail.next;          
         do {
             System.out.print(p.data + (p.next == tail.next ? "" : " -> "));
             p = p.next;
@@ -59,14 +57,14 @@ public class CircularCompLinkedList<E> {
     public E deleteAtPosition(int idx) {
         check(idx);
         if (idx == 0) return removeFirst();
-        Node<E> prev = tail.next;            // cabeza
+        Node<E> prev = tail.next;          
         for (int i = 1; i < idx; i++) prev = prev.next;
         Node<E> curr = prev.next;
         E data = curr.data;
         removeNode(prev, curr);
         return data;
     }
-    private E removeFirst() {                // tail.next
+    private E removeFirst() {             
         Node<E> head = tail.next;
         E data = head.data;
         removeNode(tail, head);
@@ -83,7 +81,7 @@ public class CircularCompLinkedList<E> {
         if (size == 1) { tail = null; }
         else {
             prev.next = curr.next;
-            if (curr == tail) tail = prev;       // si quitamos tail
+            if (curr == tail) tail = prev;     
         }
         size--;
     }
@@ -92,7 +90,6 @@ public class CircularCompLinkedList<E> {
         if (i < 0 || i >= size) throw new IndexOutOfBoundsException(i);
     }
 
-    /* ---------- menú interactivo ---------- */
     private static void menu(CircularCompLinkedList<Integer> list) {
         Scanner sc = new Scanner(System.in);
         int op;
@@ -131,11 +128,10 @@ public class CircularCompLinkedList<E> {
         sc.close();
     }
 
-    /* ---------- main ---------- */
     public static void main(String[] args) {
         CircularCompLinkedList<Integer> lista = new CircularCompLinkedList<>();
-        for (int i = 1; i <= 10; i++) lista.insert(i);  // precargar 1-10
-        lista.printList();                               // estado inicial
+        for (int i = 1; i <= 10; i++) lista.insert(i);
+        lista.printList();                             
         menu(lista);
     }
 }
