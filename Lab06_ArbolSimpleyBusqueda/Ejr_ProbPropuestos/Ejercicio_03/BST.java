@@ -9,20 +9,14 @@ import org.graphstream.graph.implementations.SingleGraph;
 
 //Implementacion del arbol binario de busqueda con operaciones 
 //Agregandole las librerias requeridas para este ejercicio ademas 
-// de cosas utilizadas por la libreria
+// de cosas utilizadas por la libreria con el fin de graficar nuestro arboles
 
-
-/**
- * Árbol Binario de Búsqueda genérico con método de graficado.
- */
 public class BST<T extends Comparable<T>> {
     private Node<T> root;
 
     public BST() {
         this.root = null;
     }
-
-    // ------------ Métodos del Ejercicio 1 ------------
 
     public void destroy() { root = null; }
 
@@ -99,9 +93,8 @@ public class BST<T extends Comparable<T>> {
         inOrderRec(node.getRight(), out);
     }
 
-    // ------------ Fin métodos del Ejercicio 1 ------------
 
-    /** Grafica el árbol usando GraphStream */
+    //graficando con Graph Stream
     public void graphBST() {
         System.setProperty("org.graphstream.ui", "swing");
         Graph g = new SingleGraph("BST");
@@ -112,13 +105,11 @@ public class BST<T extends Comparable<T>> {
         g.display();
     }
 
-    /** Recorre el BST y añade nodos/aristas al grafo */
     private void buildGraph(Node<T> bstNode, Graph g) {
         if (bstNode == null) return;
 
         String id = bstNode.getData().toString();
 
-        // Nodo de GraphStream (calificado para evitar choque de nombres)
         org.graphstream.graph.Node gsNode = g.getNode(id);
         if (gsNode == null) {
             gsNode = g.addNode(id);
